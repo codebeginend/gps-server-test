@@ -3,7 +3,7 @@ var http = require('http');
 
 var app = http .createServer();
 var io = io.listen(app);
-app.listen(80);
+app.listen(8090);
 
 io.sockets.on('connection', function (socket) {
 	socket.on('eventServer', function (data) {
