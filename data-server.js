@@ -9,7 +9,7 @@ var s = net.Server(function(socket) {
     socket.on('data', function(d) {
 
         for (var i=0; i < sockets.length; i++ ) {
-            sockets[i].write(d);
+            this.do_log(sockets[i].write(d));
         }
     });
 });
