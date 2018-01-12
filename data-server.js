@@ -1,16 +1,17 @@
-var io = require('socket.io');
-var http = require('http');
+net = require('net');
 
-var app = http .createServer();
-var io = io.listen(app);
-app.listen(8090);
+var sockets = [];
 
-io.sockets.on('connection', function (socket) {
-	socket.on('eventServer', function (data) {
-		console.log(data);
-		socket.emit('eventClient', { data: 'Hello Client' });
-	});
-	socket.on('disconnect', function () {
-		console.log('user disconnected');
-	});
+var s = net.Server(function(socket) {
+
+    sockets.push(socket);
+
+    socket.on('data', function(d) {
+
+        for (var i=0; i < sockets.length; i++ ) {
+            sockets[i].write(d);
+        }
+    });
 });
+
+s.listen(8090);
