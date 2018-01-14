@@ -1,0 +1,45 @@
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Тег SCRIPT</title>
+ </head>
+ <body>
+  <script type="text/javascript">
+  let input  = '084104097116039115032111110101032115109097108108032115116101112032102111114032097032109097110044032111110101032103105097110116032108101097112032102111114032109097110107105110100046'; // That's one small step for a man, one giant leap for mankind.
+  let result = '';
+
+  function findFirstChar(n)
+  {
+      let char = String.fromCharCode(n);
+
+      if (/[a-z|A-Z \.,']/.test(char))
+          return char;
+      else
+          return false;
+  }
+
+  function theRecursion(input, i)
+  {
+      if (!input.length) return;
+
+      i = i || 1;
+
+      let char = input.substr(0, i);
+
+      if (char = findFirstChar(char))
+      {
+          result += char;
+          theRecursion(input.substr(i));
+      }
+      else
+      {
+          theRecursion(input, ++i);
+      }
+  }
+
+  theRecursion(input);
+
+  console.log(result); // That's one small step for a man, one giant leap for mankind.
+  </script>
+ </body>
+</html>
